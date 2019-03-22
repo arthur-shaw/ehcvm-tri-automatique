@@ -1,0 +1,48 @@
+//SCALAR rc
+0
+//SCALAR stataVersion
+14
+//NUMERICLIST statusesToReject
+100 120
+//STRING casesToReviewDta
+casesToReview.dta
+//STRING commentsDta
+interview__comments.dta
+//STRING constructedDir
+C:/Users/wb393438/UEMOA/vague2/auto-sort/donnees/derivees/
+//STRING downloadDir
+C:/Users/wb393438/UEMOA/vague2/auto-sort/donnees/telechargees/
+//STRING export_type
+STATA
+//STRING interviewStatsDta
+interviewStats.dta
+//STRING issuesDta
+issues.dta
+//STRING logDir
+C:/Users/wb393438/UEMOA/vague2/auto-sort/logs/
+//STRING login
+GBphmecvEPV1AP1
+//STRING password
+GBphm31236V1AP1
+//STRING pattern
+QUESTIONÁRIO AO AGREGADO FAMILIAR
+//STRING progDir
+C:/Users/wb393438/UEMOA/vague2/auto-sort/programmes/
+//STRING rawDir
+C:/Users/wb393438/UEMOA/vague2/auto-sort/donnees/fusionnees/
+//STRING resultsDir
+C:/Users/wb393438/UEMOA/vague2/auto-sort/resultats/
+//STRING server
+gbphecvm
+//STRING serverDetails
+serverDetails.R
+//LIST export_details$HasExportedFile
+TRUE
+//LIST export_details$LastUpdateDate
+1552963684
+//CLIST export_details$ExportStatus
+"NotStarted"  
+//LIST export_details$RunningProcess
+
+//LIST export_details$request_time
+1552963691
