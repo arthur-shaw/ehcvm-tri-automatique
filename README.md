@@ -14,6 +14,9 @@
     - [Consulter avant de rejeter](#consulter-avant-de-rejeter)
     - [Ajouter des observations avant de rejeter](#ajouter-des-observations-avant-de-rejeter)
 - [Dépannage](#dépannage)
+    - [Problèmes connus](#problèmes-connus)
+    - [Problèmes particuliers](problèmes-particuliers)
+    - [Problèmes généraux / requêtes de fonctionnalité](problèmes-généraux-requêtes-de-fonctionnalité)
 
 # Présentation rapide
 
@@ -300,7 +303,9 @@ Ayant modifié le programme:
 
 ## Problèmes connus
 
-A la fin de l'exécution, le programme `runAll.do` affiche un message d'erreur du style:
+### Erreur à la fin de l'exécution
+
+A la fin de l'exécution du programme `runAll.do`, Stata affiche un message d'erreur du style:
 
 ```
 invalid '"haven' 
@@ -308,6 +313,19 @@ r(198);
 ```
 
 Ceci n'empêche nullement l'exécution du programme et l'accomplissement de sa tâche. Mais, il faut le dire, c'est bizarre et ça soulève des questions.
+
+### Absence de package requis
+
+En principe, le programme doit installer tous les packages R requis. Si jamais un message d'erreur s'affiche indiquant l'abence d'un package, installer tous les packages en :
+
+- Ouvrant RStudio
+- Copiant, collant, et exécutant la syntaxe suivante
+
+```
+packagesNeeded <- c("httr", "RCurl", "dplyr", "haven", "stringr", "fuzzyjoin")
+install.packages(packagesNeeded, 
+    repos = 'https://cloud.r-project.org/', dep = TRUE)
+```
 
 ## Problèmes particuliers
 
@@ -317,7 +335,7 @@ Veuillez vous approcher de votre membre d'appui de l'équipe CAPI de la Banque M
 
 Veuillez décrire le problème sur ce répositoire.
 
-## Processus
+### Processus
 
 - Créer un compte GitHub. C'est facile et gratuit.
 - Se connecter au site GitHub avec votre compte.
@@ -328,7 +346,7 @@ Veuillez décrire le problème sur ce répositoire.
 - Remplir le formulaire. 
 - (Ne partager pas de données par GitHub comme ce répositoire est une plateforme publique.)
 
-## Contenu
+### Contenu
 
 Pour les problèmes, donner une description qui permette de reproduire le problème. Au minimum, donner les étapes à suivre, le résultat obtenu, et le résultat escompté. Les captures d'écran--au pluriel--sont les bienvenues. Mieux encore, essayer de repèrer le problème, d'identifier les causes probables, et de proposer une solution.
 
