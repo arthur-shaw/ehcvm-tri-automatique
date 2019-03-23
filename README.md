@@ -15,8 +15,8 @@
     - [Ajouter des observations avant de rejeter](#ajouter-des-observations-avant-de-rejeter)
 - [Dépannage](#dépannage)
     - [Problèmes connus](#problèmes-connus)
-    - [Problèmes particuliers](problèmes-particuliers)
-    - [Problèmes généraux / requêtes de fonctionnalité](problèmes-généraux-requêtes-de-fonctionnalité)
+    - [Problèmes particuliers](#problèmes-particuliers)
+    - [Problèmes généraux / requêtes de fonctionnalité](#problèmes-généraux-requêtes-de-fonctionnalité)
 
 # Présentation rapide
 
