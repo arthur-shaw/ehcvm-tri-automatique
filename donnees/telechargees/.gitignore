@@ -1,0 +1,8 @@
+# Stata data files
+*.dta
+
+# export readme text file
+*.txt
+
+# zip files
+*.zip
