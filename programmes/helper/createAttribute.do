@@ -8,7 +8,7 @@ syntax 				///
 	[anyVars(string asis)] 	/// variables to inspect
 	[varVals(numlist)] 	/// values to find
 	[countList(string asis)] 	/// variable name of list
-	[listMiss(string asis)] 	/// missing value marker in list
+	[listMiss(string)] 	/// missing value marker in list
 	[countWhere(string asis)] 	/// condition : count after filter
 	[anyWhere(string asis)] 	/// condition : any after filter
 	[byGroup(varlist)] 	/// group within which county/any evaluated
@@ -63,7 +63,7 @@ syntax 				///
 			local listVars = r(varlist)
 
 			* replace list elements with missing
-			capture confirm string variable `countList'
+			capture confirm string variable `listVars'
 			if _rc == 0 {
 
 				// if list missing marker not specified, use SuSo default
