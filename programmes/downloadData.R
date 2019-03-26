@@ -29,8 +29,10 @@ source(paste0(progDir, "/downloadData/dl_one.R"))
 source(paste0(progDir, "/downloadData/dl_allvers.R"))
 source(paste0(progDir, "/downloadData/dl_similar.R"))
 
-# override pattern defition for Guinée-Bissau ; Portuguese accents don't match in str_detect
-pattern = "QUESTIONÁRIO AO AGREGADO FAMILIAR"
+# override pattern defition if needed; otherwise, program will use nomMasque in configurePrograms.do
+   # For Guinée-Bissau, there's a problem with Portuguese accents. Seems like str_detect, doesn't 
+   # recognize them, or they get corrupted when Stata writes them to file.  
+# pattern = ""
 
 # run function to download data for templates whose names matches `pattern`
 dl_similar(
