@@ -308,7 +308,7 @@ Ayant modifié le programme:
 A la fin de l'exécution du programme `runAll.do`, Stata affiche un message d'erreur du style:
 
 ```
-invalid '"haven' 
+invalid '"interview__status' 
 r(198);
 ```
 
