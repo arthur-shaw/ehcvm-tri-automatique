@@ -88,7 +88,7 @@ unzipAll, folder("`downloadDir'")
 
 * confirm that zip files unzipped
 local dirList : dir "`downloadDir'" dirs "*" , nofail respectcase
-if ("`dirList'" != "") {
+if ("`dirList'" == "") {
 	di as error "Failure to create destination folder for zipped files"
 	error 1
 }
