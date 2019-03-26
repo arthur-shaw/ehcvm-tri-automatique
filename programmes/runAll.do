@@ -65,7 +65,7 @@ rcall sync : source(paste0("`progDir'", "downloadData.R")) 	// download data
 
 * confirm that files actually downloaded
 local zipList : dir "`downloadDir'" files "*.zip" , nofail respectcase
-if ("`zipList'" != "") {
+if ("`zipList'" == "") {
 	di as error "No data files downloaded from the server. Please try again."
 	di as error "If this error persists, check the following: "
 	di as error "1. Internet connection. "
@@ -97,7 +97,7 @@ if ("`dirList'" != "") {
 local firstDir : word 1 of `dirList'
 local firstDir = "`downloadDir'" + "`firstDir'/"
 local dtaList : dir "`firstDir'" files "*.dta" , nofail respectcase
-if ("`dtaList'" != "") {
+if ("`dtaList'" == "") {
 	di as error "Folders created by unzipping do not contain any .dta files"
 	error 1
 }
