@@ -133,7 +133,7 @@ A partir de la ligne 8, indiquer les paramètres suivants:
 
 Pour créer un utilisateur de type API, se connecter au serveur en tant qu’admin, cliquer sur « Equipes et rôles », sélectionner « Utilisateurs de l’API », créer un compte, et utiliser le login et mot de passe, respectivement, pour les paramètres `login` et `password` décrits plus haut.
 
-#### Interviews to process
+#### Identify interviews to process
 
 A partir de la ligne 18, indiquer le statut(s) d'entretiens à valider. Si un seul statut est visé, renseigner le code entre guillemets. Si plusieurs statuts sont visés, renseigner ces codes comme une liste délimité par vigule.
 
@@ -166,7 +166,7 @@ A partir de la ligne 67, il faut décrire les fichiers impliqués dans le calcul
 
 Pour les facteurs de conversion, il faut indiquer:
 
-- `factorsDta`. Le chemin complet menant au fichier (e.g., `C:/monDossier/fichier.dta`)
+- `factorsDta`. Nom de la base des facteurs de conversion.
 - `factorsByGeo`. Si les facteurs de conversion sont rangés par groupement géographique (e.g., région, strate, etc.). Si oui, mettre `"true"`. Sinon, mettre `"false"`.
 - `geoIDs`. Deux cas de figure: 
     - Si les facteurs sont rangés par groupement géographique, indiquer la liste des variables géographiques qui identifent ces groupements. Notez que la liste est délimitée par les espaces (e.g., `s00q01 s00q04`). Notez également que le noms de ces variables doivent s'accorder avec ces mêmes variables dans la base ménage. 
@@ -206,11 +206,11 @@ Pour le dossier de sortie:
 
 #### Chemin du projet
 
-A la ligne 5, copier et coller le dossier du projet--c'est à dire où vous avez téléchargé et décomprimé ce répositoire. Notez: aucun besoin de modifier le chemin pour anticiper les besoins de R. Le programme s'en occupe.
+A la ligne 5, copier et coller le chemin d'accès au dossier projet--c'est à dire là où vous avez téléchargé et décomprimé ce répositoire. Notez: aucun besoin de modifier le chemin pour anticiper les besoins de R. Le programme s'en occupe.
 
 #### computeCalories
 
-Si les facteurs de conversion ne sont pas rangés par groupements géographiques, supprimer la ligne 188. Sinon, laisser la ligne telle quelle ainsi que toutes les autres lignes dans le parages.
+Si les facteurs de conversion ne sont pas rangés par groupements géographiques, supprimer (uniquement) la ligne 188. Sinon, laisser la ligne telle quelle, ainsi que toutes les autres lignes dans ce bloc de code.
 
 # Mode d'emploi
 
@@ -228,7 +228,7 @@ Pour ce faire, il suffit de lancer le programme `runAll.do` depuis Stata. Ce pro
 
 Si l'on souhaite voir les recommandations du programme et les passer en revue avant de rejeter, il faut arrêter l'exécution avant que les rejets sont communiqués au serveur.
 
-Pour ce faire, avant de lancer `runAll.do`, ouvrir `processInterviews.R` (dans un éditeur de texte quelconque), mettre `# ` devant les lignes 66, 72, et 79, et sauvegarder `processInterviews.R`. Autrement dit, faire les ajustements ci-dessous:
+Pour ce faire, avant de lancer `runAll.do`, ouvrir `processInterviews.R` (dans un éditeur de texte quelconque), mettre `# ` devant les lignes 66, 72, et 78, et sauvegarder `processInterviews.R`. Autrement dit, faire les ajustements ci-dessous:
 
 ```
 # -----------------------------------------------------------------------------
