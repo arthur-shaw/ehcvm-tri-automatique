@@ -21,8 +21,9 @@
 # packages needed for this program 
 packagesNeeded <- c(
 	"dplyr",	# for convenient data wrangling
-	"haven"  	# for loading Stata data
-)								
+	"haven",  	# for loading/writing data to Stata
+	"readr" 	# for writing data to Excel
+)														
 
 # identify and install those packages that are not already installed
 packagesToInstall <- packagesNeeded[!(packagesNeeded %in% installed.packages()[,"Package"])]
@@ -203,9 +204,8 @@ issues <- full_join(issues, issues_hasInvalid, by = c("interview__id", "intervie
 # write list to disk as a Stata file
 write_dta(data = toReview, path = paste0(resultsDir, "toReview.dta"), version = stataVersion)
 
-# !!! FOR TESTING - DELETE AFTERWARDS
-# write_dta(data = issues, path = paste0(constructedDir, "issues_expanded.dta"), version = stataVersion)
-# !!! FOR TESTING - DELETE AFTERWARDS
+# write to Excel
+write_excel_csv(toReview, path = paste0(resultsDir, "toReview.xls"), col_names = TRUE)
 
 # =============================================================================
 # Approve

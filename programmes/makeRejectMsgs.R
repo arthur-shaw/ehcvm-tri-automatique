@@ -5,8 +5,9 @@
 # packages needed for this program 
 packagesNeeded <- c(
 	"dplyr",		# for convenient data wrangling
-	"haven" 		# for writing results to a Stata file
-)								
+	"haven", 		# for writing results to a Stata file
+	"readr" 		# for writing data to Excel
+)									
 
 # identify and install those packages that are not already installed
 packagesToInstall <- packagesNeeded[!(packagesNeeded %in% installed.packages()[,"Package"])]
@@ -56,7 +57,11 @@ toReject <-
 	left_join(casesToReview, by = "interview__id")  %>%
 	left_join(interviewInfo, by = "interview__id")
 
+# write reject list to Stata
 write_dta(data = toReject, path = paste0(resultsDir, "toReject.dta"), version = stataVersion)
+
+# write reject list to Excel
+write_excel_csv(toReject, path = paste0(resultsDir, "toReject.xls"), col_names = TRUE)
 
 # TODO: Add option for custom ordering
 # There are a few methods for this
