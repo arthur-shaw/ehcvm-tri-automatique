@@ -65,6 +65,7 @@ rcall sync : source(paste0("`progDir'", "downloadData.R")) 	// download data
 
 * confirm that files actually downloaded
 local zipList : dir "`downloadDir'" files "*.zip" , nofail respectcase
+local zipList : list clean zipList
 if ("`zipList'" == "") {
 	di as error "No data files downloaded from the server. Please try again."
 	di as error "If this error persists, check the following: "
@@ -88,6 +89,7 @@ unzipAll, folder("`downloadDir'")
 
 * confirm that zip files unzipped
 local dirList : dir "`downloadDir'" dirs "*" , nofail respectcase
+local dirList : list clean dirList
 if ("`dirList'" == "") {
 	di as error "Failure to create destination folder for zipped files"
 	error 1
@@ -97,6 +99,7 @@ if ("`dirList'" == "") {
 local firstDir : word 1 of `dirList'
 local firstDir = "`downloadDir'" + "`firstDir'/"
 local dtaList : dir "`firstDir'" files "*.dta" , nofail respectcase
+local dtaList : list clean dtaList
 if ("`dtaList'" == "") {
 	di as error "Folders created by unzipping do not contain any .dta files"
 	error 1

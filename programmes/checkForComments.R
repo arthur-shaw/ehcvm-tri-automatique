@@ -96,6 +96,6 @@ commentsOverall <- commentsForCasesToReview %>%
 # interviews with comments
 interview_hasComments <- casesToReview %>%
 	semi_join(
-		union(commentsOnIssueVars, commentsOverall) %>%
-		distinct(interview__id),
+		full_join(commentsOnIssueVars, commentsOverall, by = "interview__id") %>%
+		distinct( interview__id),
 	by = "interview__id")
