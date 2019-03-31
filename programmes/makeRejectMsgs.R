@@ -29,6 +29,11 @@ if (!exists("issues")) {
 	stop("List of interview issues not found.")
 }
 
+# interview info
+if (!exists("interviewInfo")) {
+	stop("Interview metadata not found.")
+}
+
 # =============================================================================
 # Add reject message to toReject
 # =============================================================================
@@ -48,7 +53,8 @@ toReject <-
 	# separated by new line character
 	group_by(interview__id) %>%
 	summarise(rejectMessage = paste(issueComment, collapse = " \n ")) %>%
-	left_join(casesToReview, by = "interview__id")
+	left_join(casesToReview, by = "interview__id")  %>%
+	left_join(interviewInfo, by = "interview__id")
 
 write_dta(data = toReject, path = paste0(resultsDir, "toReject.dta"), version = stataVersion)
 

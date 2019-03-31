@@ -35,6 +35,12 @@ lapply(packagesNeeded, library, character.only = TRUE)
 # Confirm inputs exist
 # =============================================================================
 
+# interview actions
+interviewActions <- paste0(rawDir, "interview__actions.dta")
+if (!file.exists(interviewActions)) {
+	stop("Interview actions file cannot be found")
+}
+
 # inteview statistics
 interviewStatsPath <- paste0(constructedDir, interviewStatsDta)
 if (!file.exists(interviewStatsPath)) {
@@ -53,6 +59,20 @@ if (!exists("casesToReview")) {
 if (!exists("interview_hasComments")) {
 	stop("Interviews with comments cannot be loaded. If needed, re-run checkForComments.R")
 }
+
+# =============================================================================
+# Create interview metadata for inclusion in to[ACTION] files
+# =============================================================================
+
+actions <- read_stata(file = paste0(rawDir, "interview__actions.dta"))
+
+interviewInfo <- actions %>%			
+	filter(action == 3) %>%			# filter to completed
+	group_by(interview__id) %>% 	# group by interview
+	slice(n()) %>% 					# take last action
+	ungroup() %>%
+	rename(interviewer = originator, supervisor = responsible__name) %>%
+	select(interview__id, interviewer, supervisor)
 
 # =============================================================================
 # Determine whether has rejectable attribute
@@ -145,7 +165,8 @@ toReview <-
 	mutate(numInvalid = Invalid, numComments = WithComments) %>%
 	select(interview__id, numComments, numInvalid) %>%
 	left_join(casesToReview, by = "interview__id") %>%  
-	select(interview__id, interview__key, interview__status, numComments, numInvalid)
+	select(interview__id, interview__key, interview__status, numComments, numInvalid) %>%
+	left_join(interviewInfo, by = "interview__id")
 	
 # create an issue for each interview with unanswered questions
 # issues_hasUnanswered <- 
