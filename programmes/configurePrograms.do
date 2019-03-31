@@ -5,6 +5,13 @@ CONFIGURATION PARAMETERS
 set more 1
 
 /*-----------------------------------------------------------------------------
+How to call R
+-----------------------------------------------------------------------------*/
+
+local howCallR 	"shell"	// values: rcall, shell
+local rPath 	"C:/Program Files/R/R-3.5.2/bin/R.exe" // values: blank or path to R.exe
+
+/*-----------------------------------------------------------------------------
 Server details
 -----------------------------------------------------------------------------*/
 
@@ -44,6 +51,7 @@ local completedInterview "
 Construct file paths
 -----------------------------------------------------------------------------*/
 
+* construct paths relative to projet root
 local downloadDir 		"`projDir'/donnees/telechargees/"
 local rawDir 			"`projDir'/donnees/fusionnees/"
 local constructedDir 	"`projDir'/donnees/derivees/"
@@ -52,17 +60,24 @@ local progDir 			"`projDir'/programmes/"
 local resultsDir 		"`projDir'/resultats/"
 local logDir 			"`projDir'/logs/"
 
+* make paths R-friendly
 local filePaths "downloadDir rawDir constructedDir resourceDir progDir resultsDir logDir"
 
 foreach filePath of local filePaths {
 
+	* replace backslashes with slashes
 	local `filePath' = subinstr("``filePath''", "\", "/", .)
+	
+	* ensure path has a terminal slash
 	capture assert substr("``filePath''", -1, 1) == "/"
 	if _rc != 0 {
 		local `filePath' = "``filePath''" + "/"
 	}
 
 } 
+
+* ensure R.exe file path has slashes instead of backslashes
+local rPath = subinstr("`rPath'", "\", "/", .)
 
 /*-----------------------------------------------------------------------------
 Calorie computation data and variables

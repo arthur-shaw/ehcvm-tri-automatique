@@ -100,6 +100,8 @@ Par défaut, `rcall` cherche R sur l’ordinateur à un certain endroit. Si l’
 - Lancer la commande suivante, où  [CHEMIN] est remplacé par le chemin construit ci-haut : `rcall setpath "[CHEMIN]"`
 - Tester rcall à nouveau pour s’assurer que le paramétrage est bien fait. Voir plus haut le processus pour tester `rcall`.
 
+Si `rcall` ne marche pas après plusieurs tentatives, lancer R par cmd. Voir [cette section](#how-to-call-r) pour plus de détails.
+
 # Paramétrage 
 
 ## Mettre en place les bases
@@ -120,6 +122,22 @@ Voici les paramètres à modifier par programme.
 ### configurePrograms.do
 
 Comme son nom l'indique, ce programme rassemble la majeur partie des paramètres.
+
+#### How to call R
+
+Le programme présente deux choix pour lancer R:
+
+1. `rcall`. C'est à dire avec l'ado `rcall`
+2. cmd. C'est à dire avec la fenête de commande du système d'exploitation.
+
+Voici les paramètres à renseigner:
+
+- `howCallR`. Renseigner la valeur selon la méthode souhaitée pour lancer R: `rcall`, si par l'ado `rcall`; `shell`, si par la fenêtre de commande. Les deux options sont bonnes, mais la seconde est légèrement préférée, comme elle affiche aussi bien dans la fenêtre de commande du système d'exploitation que dans Stata le processus et les résultats des programmes R.
+- `rPath`. Nécessaire seulement pour l'option de lancer R depuis la fenêtre de commande. Chemin du fichier `exe` responsable de lancer R. Pour construire ce chemin:
+    + Ouvrir RStudio
+    + Sélectionner "Global options" à partir du menu « Tools »
+    + Cliquer sur l’onglet "General", et copier l’adresse indiquée sous "R version", le chemin vers l’installation de R utilisée par R Studio
+    + Construire un chemin complet en copiant cette adresse et en ajoutant « /bin/R.exe » à la fin
 
 #### Server details
 

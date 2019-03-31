@@ -59,9 +59,16 @@ Download data
 =============================================================================*/
 
 * download data with R
-rcall sync : rm(list = ls()) 								// delete prior R session info
-rcall sync : source(paste0("`progDir'", "filePaths.R")) 	// pass parameters and file paths to R
-rcall sync : source(paste0("`progDir'", "downloadData.R")) 	// download data
+if ("`howCallR'" == "rcall") {
+	rcall sync : rm(list = ls()) 								// delete prior R session info
+	rcall sync : source(paste0("`progDir'", "filePaths.R")) 	// pass parameters and file paths to R
+	rcall sync : source(paste0("`progDir'", "downloadData.R")) 	// download data
+}
+else if ("howCallR" == "shell") {
+	cd "`progDir'"
+	shell "`rPath'" CMD BATCH filePaths.R
+	shell "`rPath'" CMD BATCH downloadData.R
+}
 
 * confirm that files actually downloaded
 local zipList : dir "`downloadDir'" files "*.zip" , nofail respectcase
@@ -236,5 +243,13 @@ Run R programs to:
 - Reject interviews
 -----------------------------------------------------------------------------*/
 
-rcall sync : source(paste0("`progDir'", "filePaths.R"), echo = TRUE)
-rcall sync : source(paste0("`progDir'", "processInterviews.R"), echo=TRUE)
+if ("`howCallR'" == "rcall") {
+	rcall sync : source(paste0("`progDir'", "filePaths.R"), echo = TRUE)
+	rcall sync : source(paste0("`progDir'", "processInterviews.R"), echo=TRUE)
+}
+else if ("`howCallR'" == "shell") {
+	cd "`progDir'"
+	shell "`rPath'" CMD BATCH filePaths.R
+	shell "`rPath'" CMD BATCH processInterviews.R
+}
+
