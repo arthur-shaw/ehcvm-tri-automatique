@@ -125,11 +125,12 @@ Comme son nom l'indique, ce programme rassemble la majeur partie des paramètres
 
 A partir de la ligne 8, indiquer les paramètres suivants:
 
-- `server`. Pour clarifier, "demo" serait la valeur de `server` pour un serveur à l'adresse suivante "demo.mysurvey.solutions"
+- `server`. Pour clarifier, pour les serveurs cloud, "demo" serait la valeur de `server` pour un serveur à l'adresse suivante "demo.mysurvey.solutions". Pour le serveur local, mettre l'adresse complète (e.g. `https://192.123.456`).
 - `login`. Nom d'utilisateur pour un utilisateur de type API ou admin.
 - `password`. Mot de passe de cet utilisateur.
 - `nomMasque`. Titre du questionnaire. Indiquer le nom du masque tel qu’il apparait sur le serveur (hormis les numéros de versions). S’il y a plusieurs versions du même masque qui ont des nom différents, utiliser un nom qui identifie ces deux masques. Par exemple, si les masques sont « Questionnaire ménage UEMOA – Septembre 2018 » et « Questionnaire ménage UEMOA – Octobre 2018 », prendre la « racine » des deux : « Questionnaire ménage UEMOA ». Si souhaité, on peut également employer des expressions régulières. Par exemple, si l'on a des questionnaires `Questionnaire - octobre 2019` et `Questionnaire novembre 2019`, on peut utiliser l'expression régulière suivante pour désigner les deux à la fois: `Questionnaire - [a-z]+bre 2019`, puisque ces deux mois se termine en `bre`. Si le nom du masque comporte des caractères avec des accents (e.g., ç, é, À, Ü, etc.), on doit les remplacer avec `\\w`. Par exemple, `Questionnaire ménage` doit devenir `Questionnaire m\\wnage`.
 - `exportType`. Ne toucher pas. Ce programme a besoin de données Stata pour fonctionner.
+- `serverType`. Si le serveur est hébergé par la Banque Mondiale, laisser la valeur `"cloud"`. Si le serveur est hébergé localement, mettre `"local"`.
 
 Pour créer un utilisateur de type API, se connecter au serveur en tant qu’admin, cliquer sur « Equipes et rôles », sélectionner « Utilisateurs de l’API », créer un compte, et utiliser le login et mot de passe, respectivement, pour les paramètres `login` et `password` décrits plus haut.
 

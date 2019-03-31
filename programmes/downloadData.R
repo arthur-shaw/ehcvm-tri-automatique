@@ -43,6 +43,7 @@ dl_similar(
    folder = downloadDir,   
    unzip = FALSE,
    server = server,
+   serverType = serverType,   
    user = login,  		
    password = password, 
    tries = 100)

@@ -13,6 +13,7 @@ local login			= 	"" 	// login for API user or admin
 local password		= 	"" 	// password for user whose login is provided above
 local nomMasque 	=	"" 	// questionnaire title--that is, title, not questionnaire variable
 local exportType 	=	"STATA" 	//
+local serverType 	= 	"cloud" 	// values: "cloud", "local"
 
 /*-----------------------------------------------------------------------------
 Identify interviews to process
@@ -172,6 +173,7 @@ file open  serverDetails using "`progDir'/serverDetails.R", write replace
 file write serverDetails `"server 	<- "`server'""' 	_n
 file write serverDetails `"login 	<- "`login'""' 		_n
 file write serverDetails `"password <- "`password'""' 	_n
+file write serverDetails `"serverType 	<- "`serverType'""' _n
 file close serverDetails
 
 /*-----------------------------------------------------------------------------

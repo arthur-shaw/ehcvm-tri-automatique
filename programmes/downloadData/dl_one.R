@@ -11,6 +11,7 @@ dl_one <- function(
                     folder,
                     unzip = TRUE, #option to unzip file after download
                     server,  # server prefix
+                    serverType = "cloud", # server type                    
                     user = "APIuser",  # API user ID
                     password = "Password123",  # password,
                     tries = 10 # number of times to check for export
@@ -44,8 +45,11 @@ dl_one <- function(
   # build base URL for API
   server <- tolower(str_trim(server))
 
-  api_URL <- sprintf("https://%s.mysurvey.solutions/api/v1",
-                     server)
+  if (serverType == "cloud") {   
+    api_URL <- sprintf("https://%s.mysurvey.solutions/api/v1", server)
+  } else if (serverType == "local") {
+    api_URL <- sprintf("%s/api/v1", server)
+  }
 
   # check if list of questionnaire already exists
   if (!exists("qnrList_all")) {

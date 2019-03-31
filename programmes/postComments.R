@@ -92,12 +92,18 @@ if (nrow(commentsToPost) >= 1) {
 		comment 		<- commentsToPost$issueComment[i]
 
 		# construct comment endpoint address
+		if (serverType == "cloud") {
+			baseAddress <- paste0("https://", server, ".mysurvey.solutions")
+		} else if (serverType == "local") {
+			baseAddress <- serverType
+		}
 		commentAPI <- paste0(
-			"https://", server, ".mysurvey.solutions", 		# domain
-			"/api/v1/interviews/", interviewID, 			# interview
-			"/comment-by-variable/", varName, 				# variable
-			"?comment=", curlPercentEncode(comment) 		# comment
+			baseAddress, 							# domain
+			"/api/v1/interviews/", interviewID, 	# interview
+			"/comment-by-variable/", varName, 		# variable
+			"?comment=", curlPercentEncode(comment) # comment
 			)
+
 
 		# post comment
 		postComment <- httr::POST(

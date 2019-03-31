@@ -74,7 +74,11 @@ if (!dir.exists(outputDir)) {
 }
 
 # confirm that server exists
-serverToCheck <- paste0("https://", server, ".mysurvey.solutions/")
+if (serverType == "cloud") {
+	serverToCheck <- paste0("https://", server, ".mysurvey.solutions/")
+} else if (serverType == "local") {
+	serverToCheck <- server
+}
 serverCheck <- url.exists(serverToCheck)
 if (serverCheck == FALSE) {
 	stop("The following server does not exist. Please correct this program's server parameter ", "\n", serverToCheck)
@@ -93,7 +97,11 @@ if (nchar(password) == 0) {
 }
 
 # check that logins are valid for server
-loginsToCheck <- paste0("https://", server, ".mysurvey.solutions/api/v1/questionnaires")
+if (serverType == "cloud") {
+	loginsToCheck <- paste0("https://", server, ".mysurvey.solutions/api/v1/questionnaires")
+} else if (serverType == "local") {
+	loginsToCheck <- paste0(server, "/api/v1/questionnaires")
+}
 loginsOK <- GET(
 		loginsToCheck, 
 		accept_json(), 
@@ -145,7 +153,11 @@ while (currentInterview <= numToProcess) {
 	print(paste0("Statistics being sought for interview__id: ", interviewId))
 
 	# make request
-	detailsEndpoint <- paste0("https://", server, ".mysurvey.solutions/api/v1/interviews/", interviewId, "/stats")
+	if (serverType == "cloud") {
+		detailsEndpoint <- paste0("https://", server, ".mysurvey.solutions/api/v1/interviews/", interviewId, "/stats")
+	} else if (serverType == "local") {
+		detailsEndpoint <- paste0(server, "/api/v1/interviews/", interviewId, "/stats")
+	}
 	getIntDetails <- GET(detailsEndpoint, 
 		accept_json(), 
 		encode = "json",

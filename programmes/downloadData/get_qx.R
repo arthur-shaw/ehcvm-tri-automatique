@@ -13,7 +13,7 @@
 # A data frame that has all the information about the imported
 # questionnaires on the server. This is a prettified version of the JSON response.
 
-get_qx <- function(server, user, password) {
+get_qx <- function(server, serverType, user, password) {
 
   load_pkg <- function(x) {
     if (!require(x, character.only = TRUE)) {
@@ -28,8 +28,11 @@ get_qx <- function(server, user, password) {
   load_pkg("dplyr")
 
   # build base URL for API
-  API_URL <- sprintf("https://%s.mysurvey.solutions/api/v1",
-                     server)
+  if (serverType == "cloud") {   
+    API_URL <- sprintf("https://%s.mysurvey.solutions/api/v1", server)
+  } else if (serverType == "local") {
+    API_URL <- sprintf("%s/api/v1", server)
+  }
 
   # build query
   query <- paste0(API_URL, "/questionnaires")

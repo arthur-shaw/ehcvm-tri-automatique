@@ -10,6 +10,7 @@ dl_similar <- function(
                        folder,   # directory for data download
                        unzip = TRUE, # option to unzip after download
                        server,
+                       serverType = "cloud",                       
                        user = "APIuser",  # API user ID
                        password = "Password123",  # password
                        tries = 10
@@ -58,8 +59,11 @@ dl_similar <- function(
   }
 
   # build base URL for API
-  api_URL <- sprintf("https://%s.mysurvey.solutions/api/v1",
-                     server)
+  if (serverType == "cloud") {   
+    api_URL <- sprintf("https://%s.mysurvey.solutions/api/v1", server)
+  } else if (serverType == "local") {
+    api_URL <- sprintf("%s/api/v1", server)
+  }
 
   # confirm that server exists
   serverCheck <- try(http_error(api_URL), silent = TRUE)
@@ -73,7 +77,7 @@ dl_similar <- function(
   # -------------------------------------------------------------
 
   # First, get questionnaire information from server
-  get_qx(server, user, password)
+get_qx(server, serverType, user, password)
 
   # case sensitivity option
   if (ignore.case) {
@@ -111,6 +115,7 @@ dl_similar <- function(
         folder = folder,
         unzip = unzip,
         server = server,
+        serverType = serverType,        
         user = user,
         password = password,
         tries = tries

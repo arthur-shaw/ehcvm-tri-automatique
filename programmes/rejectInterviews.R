@@ -72,7 +72,11 @@ if (!file.exists(paste0(rejectDir, rejectList))) {
 }
 
 # confirm that server exists
-serverToCheck <- paste0("https://", server, ".mysurvey.solutions/")
+if (serverType == "cloud") {
+	serverToCheck <- paste0("https://", server, ".mysurvey.solutions/")
+} else if (serverType == "local") {
+	serverToCheck <- server
+}
 serverCheck <- url.exists(serverToCheck)
 if (serverCheck == FALSE) {
 	stop("The following server does not exist. Please correct this program's server parameter", "\n", serverToCheck)
@@ -90,7 +94,11 @@ if (nchar(password) == 0) {
 }
 
 # check that logins are valid for server
-loginsToCheck <- paste0("https://", server, ".mysurvey.solutions/api/v1/questionnaires")
+if (serverType == "cloud") {
+	loginsToCheck <- paste0("https://", server, ".mysurvey.solutions/api/v1/questionnaires")
+} else if (serverType == "local") {
+	loginsToCheck <- paste0(server, "/api/v1/questionnaires")
+}
 loginsOK <- GET(
 		loginsToCheck, 
 		accept_json(), 
@@ -154,7 +162,11 @@ if (numToProcess >= 1) {
 
 		# if interview with the supervisor, use supervisor rejection
 		if (currStatus == 100) { # Completed
-			rejectEndpoint <- paste0("https://", server, ".mysurvey.solutions/api/v1/interviews/", interviewId, "/reject","?comment=", curlPercentEncode(errorMsg))
+			if (serverType == "cloud") {
+				rejectEndpoint <- paste0("https://", server, ".mysurvey.solutions/api/v1/interviews/", interviewId, "/reject","?comment=", curlPercentEncode(errorMsg))
+			} else if (serverType == "local") {
+				rejectEndpoint <- paste0(server, "/api/v1/interviews/", interviewId, "/reject","?comment=", curlPercentEncode(errorMsg))
+			}
 			rejectInterview <- PATCH(rejectEndpoint, 
 				accept_json(), 
 				encode = "json",
@@ -162,7 +174,11 @@ if (numToProcess >= 1) {
 
 		# if interview with HQ, use HQ rejection
 		} else if (currStatus == 120) { # ApprovedBySupervisor
-			rejectEndpoint <- paste0("https://", server, ".mysurvey.solutions/api/v1/interviews/", interviewId,"/hqreject","?comment=", curlPercentEncode(errorMsg))
+			if (serverType == "cloud") {
+				rejectEndpoint <- paste0("https://", server, ".mysurvey.solutions/api/v1/interviews/", interviewId,"/hqreject","?comment=", curlPercentEncode(errorMsg))
+			} else if (serverType == "local") {
+				rejectEndpoint <- paste0(server, "/api/v1/interviews/", interviewId,"/hqreject","?comment=", curlPercentEncode(errorMsg))
+			}
 			rejectInterview <- PATCH(rejectEndpoint, 
 				accept_json(), 
 				encode = "json",				
