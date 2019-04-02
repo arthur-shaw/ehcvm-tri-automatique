@@ -2,7 +2,7 @@
 Project settings
 =============================================================================*/
 
-local projDir "C:\Users\wb393438\UEMOA\vague2\auto-sort"
+local projDir ""
 
 include "`projDir'/programmes/configurePrograms.do"
 
@@ -64,7 +64,7 @@ if ("`howCallR'" == "rcall") {
 	rcall sync : source(paste0("`progDir'", "filePaths.R")) 	// pass parameters and file paths to R
 	rcall sync : source(paste0("`progDir'", "downloadData.R")) 	// download data
 }
-else if ("howCallR" == "shell") {
+else if ("`howCallR'" == "shell") {
 	cd "`progDir'"
 	shell "`rPath'" CMD BATCH filePaths.R
 	shell "`rPath'" CMD BATCH downloadData.R

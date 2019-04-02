@@ -8,8 +8,8 @@ set more 1
 How to call R
 -----------------------------------------------------------------------------*/
 
-local howCallR 	"shell"	// values: rcall, shell
-local rPath 	"C:/Program Files/R/R-3.5.2/bin/R.exe" // values: blank or path to R.exe
+local howCallR 	""	// values: rcall, shell
+local rPath 	"" // values: blank or path to R.exe
 
 /*-----------------------------------------------------------------------------
 Server details
@@ -84,14 +84,14 @@ Calorie computation data and variables
 -----------------------------------------------------------------------------*/
 
 * conversion factors (country-specific)
-local factorsDta 		"GB-NsuFacteursConversion-NiveauStrate.dta" 					// name of conversion factors file
-local factorsByGeo		"true" 				// whether factors reported by geo: "true" or "false"
-local geoIDs 			"s00q01 s00q04"		// geographic ID variables common to conversion factors and hhold data
-local prodID_fctrCurr 	"produitID" 		// current product ID
+local factorsDta 		"" 					// name of conversion factors file
+local factorsByGeo		"" 				// whether factors reported by geo: "true" or "false"
+local geoIDs 			""		// geographic ID variables common to conversion factors and hhold data
+local prodID_fctrCurr 	"" 		// current product ID
 local prodID_fctrNew 	"productID" 		// new productID
-local unitIDs_fctrCurr 	"uniteID tailleID" 	// current unit IDs in factors file
+local unitIDs_fctrCurr 	"" 	// current unit IDs in factors file
 local unitIDs_fctrNew 	"s07Bq03b s07Bq03c" // new unit IDs in factors file
-local factorVar 		"PoidsMedianStrate" // variable name for conversion factor
+local factorVar 		"" // variable name for conversion factor
 
 * calories (project-specific)
 local caloriesDta 		"calories.dta"

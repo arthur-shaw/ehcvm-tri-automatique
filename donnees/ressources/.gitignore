@@ -1,2 +1,3 @@
 # all Stata data files except calories
+*.dta
 !calories.dta
