@@ -50,7 +50,7 @@ outputDta <-  interviewStatsDta
 
 # error log
 logDir 	<- logDir
-logFile <- "failed_getInterviewStats"
+logFile <- "failed_getInterviewStats.csv"
 
 # target version for exported Stata file
 stataVersion	<- 	stataVersion
@@ -204,7 +204,7 @@ write_dta(data = returnedDetails_all, path = paste0(outputDir, outputDta), versi
 if (length(failedToGetStats) > 0) {
 
 	# merge lists of failed exports together into a data frame
-	failedExports <- do.call(rbind, listFailedExports)
+	failedExports <- do.call(rbind, failedToGetStats)
 
 	# write results to disk in a CSV file
 	write.csv(failedToGetStats, file = paste0(logDir, logFile), col.names = TRUE, append = FALSE)

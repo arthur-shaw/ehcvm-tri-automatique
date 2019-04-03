@@ -211,22 +211,23 @@ if (numToProcess >= 1) {
 
 	print("End of reject requests to the server")
 
+	# create a csv file containing failed rejections and reason for failure
+	if (length(listFailedRejections) > 0) {
+
+		# merge lists of failed exports together into a data frame
+		failedRejections <- do.call(rbind, listFailedRejections)
+
+		# give data frame columns names
+		colnames(failedRejections) <- c("Interview ID", "Why rejection failed") 
+		
+		# write results to disk in a CSV file
+		print("Saving failed rejections to local storage")
+		write.csv(failedRejections, file = logPath, col.names = TRUE, row.names = FALSE, append = FALSE)
+
+	}
+
 } else if (numToProcess == 0) {
 	print("No interviews to reject")
 }
 
-# create a csv file containing failed rejections and reason for failure
-if (length(listFailedRejections) > 0 ) {
-
-	# merge lists of failed exports together into a data frame
-	failedRejections <- do.call(rbind, listFailedRejections)
-
-	# give data frame columns names
-	colnames(failedRejections) <- c("Interview ID", "Why rejection failed") 
-	
-	# write results to disk in a CSV file
-	print("Saving failed rejections to local storage")
-	write.csv(failedRejections, file = logPath, col.names = TRUE, row.names = FALSE, append = FALSE)
-
-}
 print("End of rejectInterviews.R")

@@ -25,11 +25,6 @@ casesToReviewPath <- paste0(constructedDir, casesToReviewDta)
 # filter down to those that are "rejectable"
 casesToReview <- read_stata(casesToReviewPath) %>%
 
-# !!!!!! FOR TESTING ONLY; REMOVE AFTERWARD !!!!!
-		mutate(interview__status = if_else(row_number()%%2 == 0, 100, 120)) %>%
-		head(100) %>%
-# !!!!!! FOR TESTING ONLY; REMOVE AFTERWARD !!!!!
-
 		select(interview__id, interview__key, 	# interview identifiers
 			interview__status, 					# interview status
 			interviewComplete 					# user-defined flag for "complete" interviews

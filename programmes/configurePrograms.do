@@ -87,7 +87,7 @@ Calorie computation data and variables
 local factorsDta 		"" 					// name of conversion factors file
 local factorsByGeo		"" 				// whether factors reported by geo: "true" or "false"
 local geoIDs 			""		// geographic ID variables common to conversion factors and hhold data
-local prodID_fctrCurr 	"" 		// current product ID
+local prodID_fctrCurr 	"produitID" 		// current product ID
 local prodID_fctrNew 	"productID" 		// new productID
 local unitIDs_fctrCurr 	"" 	// current unit IDs in factors file
 local unitIDs_fctrNew 	"s07Bq03b s07Bq03c" // new unit IDs in factors file
