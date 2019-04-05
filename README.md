@@ -227,7 +227,7 @@ Pour le dossier de sortie:
 
 A la ligne 5, copier et coller le chemin d'accès au dossier projet--c'est à dire là où vous avez téléchargé et décomprimé ce répositoire. Notez: aucun besoin de modifier le chemin pour anticiper les besoins de R. Le programme s'en occupe.
 
-#### computeCalories
+#### Paramètres de la fonction computeCalories
 
 Si les facteurs de conversion ne sont pas rangés par groupements géographiques, supprimer (uniquement) la ligne 198--c'est à dire la ligne suivante, qui indique à la fonction `computeCalories` les identifiants géographiques: 
 ```
