@@ -147,7 +147,7 @@ toReview <-
 	
 	# has both 1+ major issue and 1+ comments on an issue var
 	semi_join(
-		intersect(
+		inner_join(
 			interview_hasIssues, 
 			interview_hasComments),
 		by = "interview__id") %>%
