@@ -229,7 +229,12 @@ A la ligne 5, copier et coller le chemin d'accès au dossier projet--c'est à di
 
 #### computeCalories
 
-Si les facteurs de conversion ne sont pas rangés par groupements géographiques, supprimer (uniquement) la ligne 188. Sinon, laisser la ligne telle quelle, ainsi que toutes les autres lignes dans ce bloc de code.
+Si les facteurs de conversion ne sont pas rangés par groupements géographiques, supprimer (uniquement) la ligne 198--c'est à dire la ligne suivante, qui indique à la fonction `computeCalories` les identifiants géographiques: 
+```
+geoIDs(`geoIDs')                         /// list of geo IDs
+```
+
+Sinon, laisser la ligne telle quelle, ainsi que toutes les autres lignes dans ce bloc de code.
 
 # Mode d'emploi
 
