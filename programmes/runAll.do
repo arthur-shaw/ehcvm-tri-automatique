@@ -253,3 +253,53 @@ else if ("`howCallR'" == "shell") {
 	shell "`rPath'" CMD BATCH processInterviews.R
 }
 
+/*=============================================================================
+Provide session statistics: numbers processed, to reject, to review, 
+=============================================================================*/
+
+* in data
+use "`rawDir'/`hhold'", clear
+qui : d
+local numInData = r(N)
+
+* processed
+use "`constructedDir'/casesToReview.dta", clear
+qui : d
+local numProcessed = r(N)
+
+* to reject / rejected
+capture confirm file "`resultsDir'/toReject.dta"
+if (_rc == 0) {
+
+	use "`resultsDir'/toReject.dta", clear
+	qui : d
+	local numToReject = r(N)
+
+}
+else if ((_rc != 0) | (`numProcessed' == 0)) {
+
+	local numToReject = 0
+
+}
+
+* to review
+capture confirm file "`resultsDir'/toReview.dta"
+if (_rc == 0) {
+
+	use "`resultsDir'/toReview.dta", clear
+	qui : d
+	local numToReview = r(N)
+
+}
+else if ((_rc != 0) | (`numProcessed' == 0)) {
+
+	local numToReview = 0
+
+}
+
+di as text "STATISTIQUES SUR LES RÉSULTATS DU PROGRAMME."
+di as text "Voici le nombre d'observations (ménages) par résultat :"
+di as text "- Dans les bases téléchargées : " as result "`numInData'"
+di as text "- Passés en reveu : " as result "`numProcessed'"
+di as text "- A rejeter (ou déjà rejeté) automatiquement : " as result "`numToReject'"
+di as text "- A regarder de plus près manuellement : " as result "`numToReview'"
