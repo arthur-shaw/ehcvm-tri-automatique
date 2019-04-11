@@ -163,6 +163,7 @@ boissons
 
 * variable names ;
 local consoVarList "
+s07Bq02_autre
 s07Bq03a
 s07Bq03b
 s07Bq03c

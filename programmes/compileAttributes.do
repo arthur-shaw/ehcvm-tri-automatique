@@ -81,8 +81,32 @@ createAttribute using "`attributesPath'", ///
 	attribVars(s07Aq01b|s07Aq04b|s07Aq07b|s07Aq10b|s07Aq13b|s07Aq16b|s07Aq19b)
 
 * au sein du ménage (section 7B)
+
+// dicter comment identifier les variables à compter
+// s'il y a des variables "autre" au niveau ménage, employer cet algorithme
+
+capture confirm variable s07Bq02_autre_cereales
+if (_rc == 0) {
+
+	qui : d s07Bq02_*, varlist
+	local yesNoVars = r(varlist)
+	qui : d s07Bq02_autre_*, varlist
+	local otherVars = r(varlist)
+	local yesNoVars : list yesNoVars - otherVars
+
+} 
+
+// sinon, employer celui-ci
+
+else if (_rc != 0) {
+
+	qui : d s07Bq02_*, varlist
+	local yesNoVars = r(varlist)
+
+}
+
 createAttribute using "`attributesPath'", ///
-	countVars(s07Bq02_*) 			///
+	countVars(`yesNoVars') 			///
 	varVals(1) 					///
 	attribName(numProdAlim) ///
 	attribVars(^s07Bq02_)
