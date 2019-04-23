@@ -33,7 +33,7 @@ capture erase "`issuesPath'"
 gen interview__id = ""
 gen interview__key = ""
 gen issueType = .
-label define types 1 "Critical error" 2 "Comment" 3 "SuSo validation error"
+label define types 1 "Critical error" 2 "Comment" 3 "SuSo validation error" 4 "Needs review"
 label values issueType types
 gen issueDesc = ""
 gen issueComment = ""
@@ -126,11 +126,28 @@ local peuCaloriesCom = ///
 createComplexIssue , ///
 	attributesFile(`attributesPath') ///
 	issuesFile(`issuesPath') ///
-	whichAttributes(caloriesTropFaibles) ///
-	issueCondit(caloriesTropFaibles == 1) ///
+	whichAttributes(caloriesTropFaibles repasHorsMenage_men repasHorsMenage_indiv) ///
+	issueCondit(caloriesTropFaibles == 1 & (repasHorsMenage_men == 0 & repasHorsMenage_indiv == 0)) ///
 	issueType(1) ///
 	issueDesc("Calories trop faibles") ///
 	issueComm("`peuCaloriesCom'")
+
+* calories too low, but did eat outside of the home
+local peuCalMaisRepas = ///
+"ERREUR: La consommation alimentaire déclarée est trop faible, mais " + ///
+"il y a une consommation en dehors du ménage. D'abord, confirmer que " + ///
+"tous les produits consommés ont été renseignés. Ensuite, vérifier que " + /// 
+"les quantités et  unités de consommation sont correctes. Enfin, voir " + ///
+"la consommation en dehors du ménage."
+
+createComplexIssue , ///
+	attributesFile(`attributesPath') ///
+	issuesFile(`issuesPath') ///
+	whichAttributes(caloriesTropFaibles repasHorsMenage_men repasHorsMenage_indiv) ///
+	issueCondit(caloriesTropFaibles == 1 & (repasHorsMenage_men == 1 | repasHorsMenage_indiv == 1)) ///
+	issueType(4) ///
+	issueDesc("Calories faibles, mais repas externes") ///
+	issueComm("`peuCalMaisRepas'")
 
 * calories too high for one item
 local caloriesItemComm = ///

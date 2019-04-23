@@ -95,6 +95,15 @@ interview_hasUnanswered <-
 	select(interview__id)
 
 # =============================================================================
+# Determine whether has attribute that necessitates reivew
+# =============================================================================
+
+interview_needsReview <- 
+	filter(issues, issueType == 4) %>%
+	distinct(interview__id, interview__key) %>%
+	inner_join(casesToReview, by = c("interview__id", "interview__key"))	
+
+# =============================================================================
 # Reject
 # =============================================================================
 
@@ -151,6 +160,9 @@ toReview <-
 			interview_hasIssues, 
 			interview_hasComments),
 		by = "interview__id") %>%
+
+	# or has an attribute that requires review
+	full_join(interview_needsReview, by = "interview__id") %>%
 
 	# or has at least 1 comment or validation error
 	full_join(
