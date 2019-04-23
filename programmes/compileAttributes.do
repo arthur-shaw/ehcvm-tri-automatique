@@ -389,6 +389,19 @@ createAttribute using "`attributesPath'", ///
 	attribVars(s07Aq01|s07Aq04|s07Aq07|s07Aq10|s07Aq13|s07Aq16|s07Aq19)
 
 /*-----------------------------------------------------------------------------
+8B: REPAS AVEC DES PERSONNES NON MEMBRES DU MÉNAGE
+-----------------------------------------------------------------------------*/
+
+use "`casesToReview'", clear
+merge 1:m interview__id interview__key using "`rawDir'/repas_non_membre.dta", nogen
+
+createAttribute using "`attributesPath'", ///
+	anyWhere(s08Bq06 > 0 & !mi(s08Bq06)) ///
+	byGroup(interview__id interview__key) ///
+	attribName(repasPartages) ///
+	attribVars(s08Bq06|s08Bq06)
+
+/*-----------------------------------------------------------------------------
 16A: CHAMPS
 -----------------------------------------------------------------------------*/
 

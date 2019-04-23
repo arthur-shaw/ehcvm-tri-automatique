@@ -100,7 +100,25 @@ createComplexIssue , 	///
 	issueDesc("Aucune consommation alimentaire") ///
 	issueComm("ERREUR: Aucune consommation alimentaire déclarée, que ce soit au domicile (7B) ou hors domicile (7A)")
 
-* calories too high overall
+* calories too high, with non-members sharing hhold's meals
+local tropCaloriesRepasPartCom = ///
+"ERREUR: La consommation alimentaire déclarée est trop élevée (7B), et " +	///
+"le ménage a partagé quelques repas avec des personnes non-membres du ménage (8B). " + ///
+"D'abord, confirmer que la consommation dans 7B n'inclut pas celle du personnes " + ///
+"non-membre du ménage. Ensuite, vérifier les quantités et unités déclarées pour " + ///
+"chaque produit dans 7B. Puis, confirmer que les déclarations concernent " + ///
+"la consommation et non pas l'acquisition."
+
+createComplexIssue , ///
+	attributesFile(`attributesPath') ///
+	issuesFile(`issuesPath') ///
+	whichAttributes(caloriesTropElevees repasPartages) ///
+	issueCondit(caloriesTropElevees == 1 & repasPartages == 1) ///
+	issueType(1) ///
+	issueDesc("Calories trop élevées, repas partagés") ///
+	issueComm("`tropCaloriesRepasPartCom'")
+
+* calories too high overall, with no non-members sharing hhold's meals
 local tropCaloriesCom = ///
 "ERREUR: La consommation alimentaire déclarée est trop élevée. " +	///
 "D'abord, vérifier les quantités et les unités déclarées " + ///
@@ -111,10 +129,10 @@ local tropCaloriesCom = ///
 createComplexIssue , ///
 	attributesFile(`attributesPath') ///
 	issuesFile(`issuesPath') ///
-	whichAttributes(caloriesTropElevees) ///
-	issueCondit(caloriesTropElevees == 1) ///
+	whichAttributes(caloriesTropElevees repasPartages) ///
+	issueCondit(caloriesTropElevees == 1 & repasPartages == 0) ///
 	issueType(1) ///
-	issueDesc("Calories trop élevées") ///
+	issueDesc("Calories trop élevées, aucun repas partagé") ///
 	issueComm("`tropCaloriesCom'")
 
 * calories too low overall
