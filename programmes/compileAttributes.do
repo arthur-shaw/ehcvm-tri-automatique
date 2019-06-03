@@ -430,9 +430,9 @@ createAttribute using "`attributesPath'", ///
 	attribVars(^s16Aa01b)
 
 createAttribute using "`attributesPath'", ///
-	countWhere(s16Aq45 == 1 ) ///
+	countWhere(s16Aq45 != 1 ) ///
 	byGroup(interview__id interview__key) ///
-	attribName(numMeasuredParcelles) ///
+	attribName(numParcellesNotMeasured) ///
 	attribVars(^s16Aq45)
 
 /*-----------------------------------------------------------------------------
