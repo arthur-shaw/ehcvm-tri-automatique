@@ -429,6 +429,12 @@ createAttribute using "`attributesPath'", ///
 	attribName(numParcelles) ///
 	attribVars(^s16Aa01b)
 
+createAttribute using "`attributesPath'", ///
+	countWhere(s16Aq45 == 1 ) ///
+	byGroup(interview__id interview__key) ///
+	attribName(numMeasuredParcelles) ///
+	attribVars(^s16Aq45)
+
 /*-----------------------------------------------------------------------------
 19 : ÉQUIPEMENTS AGRICOLES
 -----------------------------------------------------------------------------*/
