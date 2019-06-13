@@ -61,6 +61,12 @@ source(paste0(progDir, "decideAction.R"), echo = TRUE)
 source(paste0(progDir, "makeRejectMsgs.R"), echo = TRUE)
 
 # -----------------------------------------------------------------------------
+# Flag issues that appear both in current rejections and in past rejections
+# -----------------------------------------------------------------------------
+
+source(paste0(progDir, "flagPersistentProblems.R"), echo = TRUE)
+
+# -----------------------------------------------------------------------------
 # Post comments
 # -----------------------------------------------------------------------------
 
